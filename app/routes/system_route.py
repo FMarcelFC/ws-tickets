@@ -9,7 +9,7 @@ from app.models.tables import tbl_system
 system_router = APIRouter(tags=['system'], dependencies=[Depends(JWTBearer())])
 
 # Get all systems
-@system_router.get('/get_systems')
+@system_router.get('/system')
 async def get_systems():
     with engine.connect() as connection:
         try:

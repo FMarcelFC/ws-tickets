@@ -8,7 +8,7 @@ from app.models.tables import tbl_severity
 severity_router = APIRouter(tags=['severity'], dependencies=[Depends(JWTBearer())])
 
 # Get all severity levels
-@severity_router.get('/get_severity')
+@severity_router.get('/severity')
 async def get_severity():
     with engine.connect() as connection:
         try:

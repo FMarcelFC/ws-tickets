@@ -8,7 +8,7 @@ from app.models.tables import tbl_gender
 gender_router = APIRouter(tags=['gender'], dependencies=[Depends(JWTBearer())])
 
 # Get all genders
-@gender_router.get('/get_genders')
+@gender_router.get('/gender')
 async def get_genders():
     with engine.connect() as connection:
         try:

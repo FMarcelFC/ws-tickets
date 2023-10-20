@@ -8,7 +8,7 @@ from app.models.tables import tbl_category
 category_router = APIRouter(tags=['category'], dependencies=[Depends(JWTBearer())])
 
 # Get all categories
-@category_router.get('/get_categories')
+@category_router.get('/category')
 async def get_categories():
     with engine.connect() as connection:
         try:

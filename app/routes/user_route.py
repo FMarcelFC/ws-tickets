@@ -14,7 +14,7 @@ from sqlalchemy import text
 user_router = APIRouter(tags=['user'])
 
 # Get all users
-@user_router.get('/get_all_users', dependencies=[Depends(JWTBearer())])
+@user_router.get('/user/get_all_users', dependencies=[Depends(JWTBearer())])
 async def get_all_users():
     with engine.connect() as connection:
         try:
@@ -23,7 +23,7 @@ async def get_all_users():
         except IntegrityError as exc:
             return await handle_exception(exc)
 # Get devs
-@user_router.get('/get_devs', dependencies=[Depends(JWTBearer())])
+@user_router.get('/user/get_devs', dependencies=[Depends(JWTBearer())])
 async def get_dev_users():
     with engine.connect() as connection:
         try:
@@ -35,7 +35,7 @@ async def get_dev_users():
         except IntegrityError as exc:
             return await handle_exception(exc)
 # Add new user
-@user_router.post('/create_user')
+@user_router.post('/user')
 async def create_user(user: User):
     with engine.connect() as connection:
         try:

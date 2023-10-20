@@ -8,7 +8,7 @@ from app.models.tables import tbl_status
 status_router = APIRouter(tags=['status'], dependencies=[Depends(JWTBearer())])
 
 # Get all status
-@status_router.get('/get_status')
+@status_router.get('/status')
 async def get_status():
     with engine.connect() as connection:
         try:
