@@ -10,10 +10,10 @@ from app.models.tables import tbl_tickets
 from app.schemas.Ticket import Ticket
 from auth.jwt_bearer import JWTBearer
 
-ticket_router = APIRouter(tags=["ticket"])
+ticket_router = APIRouter(tags=["ticket"], dependencies=[Depends(JWTBearer())])
 
 # Get all tickets
-@ticket_router.get("/get_tickets", dependencies=[Depends(JWTBearer())])
+@ticket_router.get("/ticket/get_tickets")
 async def get_tickets():
     with engine.connect() as connection:
         try:
@@ -39,7 +39,7 @@ async def get_tickets():
             return await handle_exception(exc)
 
 # Get your tickets
-@ticket_router.get("/get_your_tickets", dependencies=[Depends(JWTBearer())])
+@ticket_router.get("/ticket/get_your_tickets")
 async def get_your_tickets(id:str):
     with engine.connect() as connection:
         try:
@@ -66,7 +66,7 @@ async def get_your_tickets(id:str):
             return await handle_exception(exc)
 
 # Get dev tickets
-@ticket_router.get("/get_dev_tickets", dependencies=[Depends(JWTBearer())])
+@ticket_router.get("/ticket/get_dev_tickets")
 async def get_dev_tickets(id:str):
     with engine.connect() as connection:
         try:

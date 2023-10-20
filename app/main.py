@@ -8,14 +8,14 @@ from starlette.middleware.cors import CORSMiddleware
 from decouple import config
 
 from app.config.db import engine
-# from app.routes.file_route import file_router
-# from app.routes.warranty_route import warranty_router
+from app.routes.gender_route import gender_router
+from app.routes.severity_route import severity_router
 from app.routes.login_route import login_router
 from app.routes.user_route import user_router
-# from app.routes.client_route import client_router
-# from app.routes.express_route import express_router
+from app.routes.status_route import status_router
+from app.routes.system_route import system_router
 # from app.routes.external_route import external_router
-# from app.routes.chart_route import chart_router
+from app.routes.category_route import category_router
 # from app.routes.service_route import service_router
 # from app.routes.report_route import report_router
 from app.routes.ticket_route import ticket_router
@@ -31,16 +31,16 @@ app.add_middleware(CORSMiddleware,
                    allow_methods=['*'], allow_headers=['*']
                    )
 app.include_router(ticket_router)
-# app.include_router(chart_router)
-# app.include_router(client_router)
-# app.include_router(express_router)
+app.include_router(category_router)
+app.include_router(status_router)
+app.include_router(system_router)
 # app.include_router(external_router)
-# app.include_router(file_router)
+app.include_router(gender_router)
 app.include_router(login_router)
 # app.include_router(report_router)
 # app.include_router(service_router)
 app.include_router(user_router)
-# app.include_router(warranty_router)
+app.include_router(severity_router)
 
 
 security = HTTPBasic()
