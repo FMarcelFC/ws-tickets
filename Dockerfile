@@ -28,15 +28,17 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 
-
-
-# Copy the source code into the container.
-COPY . .
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN pip install --upgrade pip --verbose
+RUN --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=bind,source=requirements.txt,target=requirements.txt \
+    python -m pip install -r requirements.txt
+
+# Copy the source code into the container.
+COPY . .
+
 
 # Switch to the non-privileged user to run the application.
 USER appuser
@@ -45,5 +47,5 @@ USER appuser
 EXPOSE 8000
 
 # Run the application.
-CMD gunicorn app.main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
-#CMD uvicorn app.main:app --host=0.0.0.0 --port=8000 --reload
+#CMD gunicorn app.main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+CMD uvicorn app.main:app --host=0.0.0.0 --port=8000 --reload

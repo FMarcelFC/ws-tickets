@@ -1,7 +1,5 @@
-from fastapi import APIRouter, Depends, status
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, Depends
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import or_
 from app.config.db import engine
 from app.helpers.exception import handle_exception
 from app.helpers.utils import id_generator
@@ -45,6 +43,8 @@ async def create_user(user: User):
             new_user["id"] = id_generator()
             new_user["password"] = new_password
             result = connection.execute(query, new_user).first()
+            if result.errno == 1062:
+                return {"error":True,"msg": "Éste email ya está registrado."}
             return {"error":False,"msg":result.msg}
         except IntegrityError as exc:
             return await handle_exception(exc)

@@ -14,9 +14,9 @@ from app.routes.login_route import login_router
 from app.routes.user_route import user_router
 from app.routes.status_route import status_router
 from app.routes.system_route import system_router
-# from app.routes.external_route import external_router
+from app.routes.profile_route import profile_router
 from app.routes.category_route import category_router
-# from app.routes.service_route import service_router
+from app.routes.menu_route import menu_router
 # from app.routes.report_route import report_router
 from app.routes.ticket_route import ticket_router
 
@@ -34,11 +34,11 @@ app.include_router(ticket_router)
 app.include_router(category_router)
 app.include_router(status_router)
 app.include_router(system_router)
-# app.include_router(external_router)
+app.include_router(profile_router)
 app.include_router(gender_router)
 app.include_router(login_router)
+app.include_router(menu_router)
 # app.include_router(report_router)
-# app.include_router(service_router)
 app.include_router(user_router)
 app.include_router(severity_router)
 

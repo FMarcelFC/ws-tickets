@@ -6,6 +6,7 @@ from datetime import date
 
 from app.config.db import engine
 from app.helpers.exception import handle_exception
+from app.helpers.utils import id_generator
 from app.models.tables import tbl_tickets
 from app.schemas.Ticket import Ticket
 from auth.jwt_bearer import JWTBearer
@@ -23,14 +24,13 @@ async def get_tickets():
                 T3.severity, 
                 CONCAT(T4.name, ' ', T4.first_name) dev, 
                 CONCAT(T5.name, ' ', T5.first_name) user, 
-                T6.name module, T7.description register, 
+                T6.name module, 
                 T8.category FROM tbl_tickets T1 
                 JOIN tbl_status T2 ON T1.id_status = T2.id 
                 JOIN tbl_severity T3 ON T1.id_severity = T3.id 
                 JOIN tbl_users T4 ON T1.id_dev = T4.id 
                 JOIN tbl_users T5 ON T1.id_user = T5.id 
                 JOIN tbl_system T6 ON T1.id_system = T6.id 
-                JOIN tbl_register T7 ON T1.id_register = T7.id 
                 JOIN tbl_category T8 ON T1.id_category = T8.id"""
             )
             result = connection.execute(query).fetchall()
@@ -49,7 +49,7 @@ async def get_your_tickets(id:str):
                 T3.severity, 
                 CONCAT(T4.name, ' ', T4.first_name) dev, 
                 CONCAT(T5.name, ' ', T5.first_name) user, 
-                T6.name module, T7.description register, 
+                T6.name module, 
                 T8.category FROM tbl_tickets T1 
                 JOIN tbl_status T2 ON T1.id_status = T2.id 
                 JOIN tbl_severity T3 ON T1.id_severity = T3.id 
@@ -76,7 +76,7 @@ async def get_dev_tickets(id:str):
                 T3.severity, 
                 CONCAT(T4.name, ' ', T4.first_name) dev, 
                 CONCAT(T5.name, ' ', T5.first_name) user, 
-                T6.name module, T7.description register, 
+                T6.name module, 
                 T8.category FROM tbl_tickets T1 
                 JOIN tbl_status T2 ON T1.id_status = T2.id 
                 JOIN tbl_severity T3 ON T1.id_severity = T3.id 
@@ -98,10 +98,11 @@ async def create_ticket(ticket: Ticket):
     with engine.connect() as connection:
         try:
             new_ticket = ticket.dict()
+            new_ticket["id"] = id_generator()
             connection.execute(tbl_tickets.insert().values(new_ticket))
             return {
                 "error": False,
-                "data": "Ticket creado con éxito",
+                "msg": "Ticket creado con éxito",
                 "code": status.HTTP_201_CREATED,
             }
         except Exception as exc:
@@ -120,7 +121,7 @@ async def update_ticket(ticket: Ticket):
             )
             return {
                 "error": False,
-                "data": "Ticket actualizado exitosamente",
+                "msg": "Ticket actualizado exitosamente",
                 "code": status.HTTP_200_OK,
             }
         except Exception as exc:

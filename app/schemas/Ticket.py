@@ -1,16 +1,16 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date, datetime
+from typing import Optional
 
 class Ticket(BaseModel):
-    id: str
+    id: Optional[str]  = None
     id_status: int
     id_category: int
-    id_serverity: int
-    start_date: datetime
-    end_date: datetime
-    last_update: datetime
-    id_dev: int
-    id_user: int
+    id_severity: int
+    start_date: date
+    end_date: Optional[date]  = None
+    last_update: Optional[datetime]  = None
+    id_dev: str
+    id_user: str
     id_system: int
-    created_at: datetime
-    id_register: int
+    created_at: Optional[datetime]  = None
