@@ -56,7 +56,6 @@ async def get_your_tickets(id:str):
                 JOIN tbl_users T4 ON T1.id_dev = T4.id 
                 JOIN tbl_users T5 ON T1.id_user = T5.id 
                 JOIN tbl_system T6 ON T1.id_system = T6.id 
-                JOIN tbl_register T7 ON T1.id_register = T7.id 
                 JOIN tbl_category T8 ON T1.id_category = T8.id
                 WHERE T1.id_user = :id_param"""
             )
@@ -83,7 +82,6 @@ async def get_dev_tickets(id:str):
                 JOIN tbl_users T4 ON T1.id_dev = T4.id 
                 JOIN tbl_users T5 ON T1.id_user = T5.id 
                 JOIN tbl_system T6 ON T1.id_system = T6.id 
-                JOIN tbl_register T7 ON T1.id_register = T7.id 
                 JOIN tbl_category T8 ON T1.id_category = T8.id
                 WHERE T1.id_dev = :id_param"""
             )
@@ -91,6 +89,7 @@ async def get_dev_tickets(id:str):
             return {"error": False, "msg": result}
         except IntegrityError as exc:
             return await handle_exception(exc)
+        
 
 # Create ticket
 @ticket_router.post("/ticket")

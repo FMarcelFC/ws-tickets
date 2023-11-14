@@ -26,8 +26,7 @@ async def login(user: Login):
                         "menu" : await get_menu(result.id)
                         }
                     token = signJWT(data)
-                    data['token'] = token
-                    return { "error": False, "msg": data}
+                    return { "error": False, "msg": {"token": token}}
                 return {"error": True, "msg": "Contraseña incorrecta"}
             return {"error": True, "msg": "El usuario incorrecto o fue eliminado"}
         except IntegrityError as exc:

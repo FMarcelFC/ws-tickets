@@ -18,7 +18,7 @@ async def get_menu():
             status = connection.execute(tbl_status.select()).fetchall()
             categories = connection.execute(tbl_category.select()).fetchall()
             query = text(
-                """SELECT T1.* FROM tbl_users T1 JOIN tbl_user_profile T2 ON T1.id = T2.id_user WHERE T2.id_profile = 2"""
+                """SELECT T1.* FROM tbl_users T1 JOIN tbl_user_profile T2 ON T1.id = T2.id_user WHERE T2.id_profile = 2 OR T2.id_profile = 1"""
             )
             devs = connection.execute(query).fetchall()
             result = {
