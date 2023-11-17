@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Nov 13, 2023 at 05:17 PM
+-- Generation Time: Nov 17, 2023 at 06:58 PM
 -- Server version: 8.1.0
 -- PHP Version: 8.2.11
 
@@ -197,6 +197,35 @@ CREATE TABLE `tbl_register` (
 
 INSERT INTO `tbl_register` (`id`, `description`, `percentage`) VALUES
 ('202308212046363ttWh9p8mJrUnHgxZF', 'Updated some features to solve the ticket.', '55%');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_scan`
+--
+
+CREATE TABLE `tbl_scan` (
+  `id` int NOT NULL,
+  `info` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `type` tinyint NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_scan`
+--
+
+INSERT INTO `tbl_scan` (`id`, `info`, `type`) VALUES
+(1, 'https://stackoverflow.com/', 1),
+(2, 'https://app.quicktype.io/', 1),
+(3, 'WIFI:T:WPA;S:Hola;P:hola1234567;H:;;', 0),
+(4, 'WIFI:T:WPA;S:Hola;P:hola1234567;H:;;', 0),
+(5, 'WIFI:T:WPA;S:Hola;P:hola1234567;H:;;', 0),
+(6, 'WIFI:T:WPA;S:Hola;P:hola1234567;H:;;', 0),
+(7, 'WIFI:T:WPA;S:Hola;P:hola1234567;H:;;', 0),
+(8, 'WIFI:T:WPA;S:Hola;P:hola1234567;H:;;', 0),
+(9, 'WIFI:T:WPA;S:Hola;P:hola1234567;H:;;', 0),
+(10, 'https://github.com/', 1),
+(11, 'WIFI:T:WPA;S:Hola;P:hola1234567;H:;;', 0);
 
 -- --------------------------------------------------------
 
@@ -399,6 +428,12 @@ ALTER TABLE `tbl_register`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_scan`
+--
+ALTER TABLE `tbl_scan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_severity`
 --
 ALTER TABLE `tbl_severity`
@@ -477,6 +512,12 @@ ALTER TABLE `tbl_platform`
 --
 ALTER TABLE `tbl_profile`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_scan`
+--
+ALTER TABLE `tbl_scan`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_severity`
