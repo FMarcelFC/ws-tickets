@@ -17,6 +17,8 @@ tbl_category = meta.tables['tbl_category']
 tbl_system = meta.tables['tbl_system']
 tbl_tickets = meta.tables['tbl_tickets']
 tbl_register = meta.tables['tbl_register']
+tbl_scan = meta.tables['tbl_scan']
+
 
 
 if len(meta.sorted_tables) > 0:

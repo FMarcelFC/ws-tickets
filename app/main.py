@@ -17,6 +17,7 @@ from app.routes.system_route import system_router
 from app.routes.profile_route import profile_router
 from app.routes.category_route import category_router
 from app.routes.menu_route import menu_router
+from app.routes.scan_route import scan_router
 # from app.routes.report_route import report_router
 from app.routes.ticket_route import ticket_router
 
@@ -38,6 +39,7 @@ app.include_router(profile_router)
 app.include_router(gender_router)
 app.include_router(login_router)
 app.include_router(menu_router)
+app.include_router(scan_router)
 # app.include_router(report_router)
 app.include_router(user_router)
 app.include_router(severity_router)
