@@ -13,4 +13,4 @@ class Ticket(BaseModel):
     id_dev: str
     id_user: str
     id_system: int
-    created_at: Optional[datetime]  = None
+    created_at: Optional[datetime]  = datetime.now()

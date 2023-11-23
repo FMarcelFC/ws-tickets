@@ -48,3 +48,18 @@ async def create_user(user: User):
             return {"error":False,"msg":result.msg}
         except IntegrityError as exc:
             return await handle_exception(exc)
+
+# Update user
+@user_router.put('/user')
+async def create_user(user: User):
+    with engine.connect() as connection:
+        try:
+            new_user = user.dict()
+            connection.execute(
+                tbl_users.update()
+                .values(new_user)
+                .where(tbl_users.c.id == user.id)
+            )
+            return {"error":False,"msg":"User updated succesfully."}
+        except IntegrityError as exc:
+            return await handle_exception(exc)
