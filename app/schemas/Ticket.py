@@ -7,6 +7,7 @@ class Ticket(BaseModel):
     id_status: int
     id_category: int
     id_severity: int
+    issue: str
     start_date: date
     end_date: Optional[date]  = None
     last_update: Optional[datetime]  = None
