@@ -54,7 +54,10 @@ async def create_user(user: User):
 async def create_user(user: User):
     with engine.connect() as connection:
         try:
+            new_password = generate_password_hash(user.password, "pbkdf2", 30)
             new_user = user.dict()
+            del new_user["id_profile"]
+            new_user["password"] = new_password
             connection.execute(
                 tbl_users.update()
                 .values(new_user)
