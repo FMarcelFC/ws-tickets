@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mysql
--- Tiempo de generación: 24-11-2023 a las 22:31:33
+-- Tiempo de generación: 08-12-2023 a las 18:24:18
 -- Versión del servidor: 8.1.0
 -- Versión de PHP: 8.2.11
 
@@ -59,17 +59,18 @@ DELIMITER ;
 
 CREATE TABLE `tbl_category` (
   `id` int NOT NULL,
-  `category` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `category` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_category`
 --
 
-INSERT INTO `tbl_category` (`id`, `category`) VALUES
-(1, 'Security'),
-(2, 'Interface'),
-(3, 'Backend');
+INSERT INTO `tbl_category` (`id`, `category`, `description`) VALUES
+(1, 'Security', 'Your issue is security-related, there was a security attact, you detected a security flaw.'),
+(2, 'Interface', 'Your issue is interface-related, you detected a bug in the interface or you think there is something to improve.'),
+(3, 'Backend', 'Your issue is backend-related, you received an error in your request, a server error.');
 
 -- --------------------------------------------------------
 
@@ -295,10 +296,12 @@ CREATE TABLE `tbl_tickets` (
 --
 
 INSERT INTO `tbl_tickets` (`id`, `id_status`, `id_category`, `id_severity`, `issue`, `start_date`, `end_date`, `last_update`, `id_dev`, `id_user`, `id_system`, `created_at`, `summary`) VALUES
-('20231108184440cFLQzJO9GFOoSgEbt2', 7, 2, 1, 'SOME ISSUE', '2023-11-08', '2023-11-09', '2023-11-24 03:11:28', '202311200938305UlWKWP43ydprukqPc', '202308212046363ttWh8p8mJrUnHgxZM', 2, NULL, NULL),
+('20231108184440cFLQzJO9GFOoSgEbt2', 7, 2, 1, 'SOME ISSUE', '2023-11-08', '2023-11-09', '2023-11-27 04:16:37', '20230830230852ss0HCw9ur5jx5RXuyv', '202308212046363ttWh8p8mJrUnHgxZM', 2, NULL, NULL),
 ('20231118121245AzHeD9tsz5ZRqEkdvu', 1, 2, 3, '', '2023-11-01', NULL, NULL, '20230830222956ecfjBd29OjGqmmcqWn', '202308212046363ttWh8p8mJrUnHgxZM', 1, NULL, NULL),
 ('20231121134847v6ttk2QxoDBZDtd01e', 1, 2, 3, '', '2023-11-21', NULL, '2023-11-21 01:48:53', '202311200938305UlWKWP43ydprukqPc', '202308212046363ttWh8p8mJrUnHgxZM', 1, NULL, NULL),
-('202311221227502tUXc8ofPD7tYIj2CN', 1, 2, 2, '', '2023-11-22', NULL, NULL, '202311200938305UlWKWP43ydprukqPc', '202308212046363ttWh8p8mJrUnHgxZM', 1, '2023-11-22 12:22:18', NULL);
+('202311221227502tUXc8ofPD7tYIj2CN', 1, 2, 2, '', '2023-11-22', NULL, NULL, '202311200938305UlWKWP43ydprukqPc', '202308212046363ttWh8p8mJrUnHgxZM', 1, '2023-11-22 12:22:18', NULL),
+('202311271505047qMs1jMOl31FobqkJt', 1, 1, 2, 'TRY', NULL, NULL, NULL, '202311200938305UlWKWP43ydprukqPc', '20231101023234BwRdtVCZNXVvIsxKO9', 1, '2023-11-27 15:05:01', NULL),
+('202311271517336Ni3KQXWWgWNn5sKeq', 1, 1, 3, 'TRYING', NULL, NULL, NULL, '202311200938305UlWKWP43ydprukqPc', '20231101023234BwRdtVCZNXVvIsxKO9', 2, '2023-11-27 15:05:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -327,7 +330,7 @@ CREATE TABLE `tbl_users` (
 INSERT INTO `tbl_users` (`id`, `name`, `first_name`, `last_name`, `status`, `email`, `password`, `phone`, `picture`, `id_gender`, `register_date`) VALUES
 ('202308212046363ttWh8p8mJrUnHgxZM', 'Freddy', 'Flores', 'Chavarria', 1, 'freddy@mail.com', 'pbkdf2:sha256:600000$0YJBVVjVEXlhZN6ABqRPVqi9seDvMM$98bbc3bceafd6ca6694ec3d66ca0dda940a1f177d17c0c7fff2a4cf1b546cec2', '5587237022', 'test.jpg', 1, '2023-08-30 22:09:53'),
 ('20230830222956ecfjBd29OjGqmmcqWn', 'Saul', 'Suarez', 'Smerlinder', 1, 'saul@mail.com', 'pbkdf2:sha256:600000$noOza5D55O4DOg5V0GU9ohmX2OB6Od$f045e55d0ea5dd96bad0347bb3f1eed4bddd675c66b289bdd227ec633d090121', '2398472986', 'test.jpg', 1, '2023-08-30 22:29:56'),
-('20230830230852ss0HCw9ur5jx5RXuyv', 'Edwin', 'Vasquez', 'Crackdona', 1, 'edwin@mail.com', 'pbkdf2:sha256:600000$Pc8dn6IrFi8SHopL7GUAyOMBEkINfV$ac425b2d0659001b804d3a6baa84f8dea3541f625a20ab69eb0f8476dae0408b', '1234567890', 'test.jpg', 1, '2023-08-30 23:08:52'),
+('20230830230852ss0HCw9ur5jx5RXuyv', 'Edwin', 'Vasquez', 'Crackdona', 1, 'edwin@mail.com', 'pbkdf2:sha256:600000$XAvVVO3lM9NdlGCzHPkz41lwGDj0Dd$72daea4eee6b26bb497530ee7e71c28cdfdf3b37d29523f47af074350eda0ba7', '1234567890', 'test.jpg', 1, '2023-08-30 23:08:52'),
 ('20231020115302nK75HPANjQUkw8yCmt', 'Javier', 'Vega', 'Monzon', 1, 'javier@mail.com', 'pbkdf2:sha256:600000$VwFvGTFyFk3aK8r6IP4ZzuZBhpmurr$02b513eaeb35885f463853a6ebcf67fbfc8ed3af4477bb8bc23f6a73e0e7b6ff', '5589632563', 'test.jpg', 1, '2023-10-20 17:53:02'),
 ('20231101023234BwRdtVCZNXVvIsxKO9', 'Freddy', 'Flores', 'Chavarria', 1, 'fmarcelfc@gmail.com', 'pbkdf2:sha256:600000$0YJBVVjVEXlhZN6ABqRPVqi9seDvMM$98bbc3bceafd6ca6694ec3d66ca0dda940a1f177d17c0c7fff2a4cf1b546cec2', '5587237022', 'example.jpg', 1, '2023-11-01 02:32:34'),
 ('20231108161207GdOodIieTG2DDVijDC', 'Javier', 'Leiva', 'Martinez', 1, 'leiva@mail.com', 'pbkdf2:sha256:600000$d30zGD5SsR9Air2wi4N0PMeDf59qKN$91bddadbd1196cda85ed48a6b9b7cd17341a76ddcfd4bcf2e90a94bd1c955cec', '5595364856', 'example.jpg', 2, '2023-11-08 16:12:07'),
@@ -353,7 +356,6 @@ CREATE TABLE `tbl_user_profile` (
 
 INSERT INTO `tbl_user_profile` (`id`, `id_user`, `id_profile`) VALUES
 (1, '202308212046363ttWh8p8mJrUnHgxZM', 1),
-(2, '20230830230852ss0HCw9ur5jx5RXuyv', 1),
 (3, '20231020115302nK75HPANjQUkw8yCmt', 3),
 (4, '20230830230852ss0HCw9ur5jx5RXuyv', 2),
 (5, '20230830222956ecfjBd29OjGqmmcqWn', 2),
